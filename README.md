@@ -20,6 +20,6 @@ yarn
 ### Run WEB application
 
 ```
-yarn dev
+yarn start
 ```
 
