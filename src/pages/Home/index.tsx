@@ -32,13 +32,7 @@ export function Home() {
 
   return (
     <Row>
-      <Col xs={24}>
-        {authors.map(({ id, name }) => (
-          <Row key={id}>
-            <Text>{name}</Text>
-          </Row>
-        ))}
-      </Col>
+      <Col xs={24}>Home</Col>
     </Row>
   );
 }
