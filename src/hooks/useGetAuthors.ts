@@ -8,7 +8,9 @@ export type GetAuthorsDTO = {
   name?: string;
 };
 
-export type AuthorsResponse = Author;
+export type AuthorsResponse = Author & {
+  songs_registered: number;
+};
 
 async function fetchAuthors<T, Body>(params: Body): Promise<T> {
   const url = "/authors/list";
@@ -18,12 +20,12 @@ async function fetchAuthors<T, Body>(params: Body): Promise<T> {
   return data;
 }
 
-export function useGetAuthors({ name }: GetAuthorsDTO) {
+export function useGetAuthors(params: GetAuthorsDTO | null = null) {
   const authors = useQuery({
-    queryKey: [QUERY_KEYS.AUTHORS.GET_AUTHORS_LIST, name],
+    queryKey: [QUERY_KEYS.AUTHORS.GET_AUTHORS_LIST, params?.name],
     queryFn: () =>
       fetchAuthors<AuthorsResponse[], GetAuthorsDTO>({
-        name,
+        name: params?.name,
       }),
   });
   return {

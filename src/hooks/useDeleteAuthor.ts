@@ -6,27 +6,29 @@ import Api from "@/services/api";
 import { Author } from "@/types";
 import { message } from "antd";
 
-interface CreateAuthorDTO {
-  name: string;
+interface DeleteAuthorDTO {
+  id: string;
 }
 
-type CreateAuthorResponse = Author;
+type DeleteAuthorResponse = Author;
 
 type Response = {
   message: string;
 };
 
-type CreateAuthorError = AxiosError<Response>;
+type DeleteAuthorError = AxiosError<Response>;
 
-async function createAuthor(parameters: CreateAuthorDTO): Promise<Author> {
-  const { data } = await Api.post<Author>("/authors", parameters);
+async function deleteAuthor(params: DeleteAuthorDTO): Promise<Author> {
+  const { data } = await Api.delete<Author>("/authors", {
+    params,
+  });
   return data;
 }
 
-export function useCreateAuthor() {
+export function useDeleteAuthor() {
   const queryClient = useQueryClient();
-  return useMutation<CreateAuthorResponse, CreateAuthorError, CreateAuthorDTO>({
-    mutationFn: (payload) => createAuthor(payload),
+  return useMutation<DeleteAuthorResponse, DeleteAuthorError, DeleteAuthorDTO>({
+    mutationFn: (payload) => deleteAuthor(payload),
     onSuccess: async () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.AUTHORS.GET_AUTHORS_LIST],

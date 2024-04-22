@@ -3,7 +3,7 @@ import { Color, ColorGroup, Colors, FontSize, Size } from "../base";
 
 export const DarkColors: Colors = {
   [ColorGroup.MONOCHROMATIC]: {
-    [Color.PRIMARY]: "#FFFFFF",
+    [Color.PRIMARY]: "#993366",
     [Color.SECONDARY]: "#D57BA8",
     [Color.TERTIARY]: "#AA7E94",
     [Color.QUATERNARY]: "#807178",
@@ -18,6 +18,7 @@ export const DarkColors: Colors = {
 
 export const dark: DarkTheme = {
   colors: DarkColors,
+  fontColor: "#ffffff",
   backgroundColor: "#553D49",
   fonts: {
     [Size.SMALL]: FontSize[Size.SMALL],
