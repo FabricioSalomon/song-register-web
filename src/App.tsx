@@ -1,36 +1,74 @@
-import { ConfigProvider } from "antd";
-import React, { useState } from "react";
-import { ThemeProvider } from "styled-components";
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ConfigProvider, ThemeConfig } from "antd";
+import { BrowserRouter } from "react-router-dom";
+import React from "react";
 
-import Routes from "./routes";
-import { Theme, theme } from "./theme";
-import { ProjectContainer } from "./styles";
 import { GlobalHeader } from "./components/GlobalHeader";
+import { useThemeContext } from "./context/Theme";
+import { ProjectContainer } from "./styles";
+import { AppRoutes } from "./routes";
+import { Theme } from "./theme";
 
 const queryClient = new QueryClient();
 
-export function App() {
-  const storageTheme = localStorage.getItem("theme");
-  const initialTheme: Theme =
-    storageTheme === Theme.DARK ? Theme.DARK : Theme.LIGHT;
-  const [selectedTheme, setSelectedTheme] = useState<Theme>(initialTheme);
+interface AppProps {
+  onSelectTheme: (theme: Theme) => void;
+}
 
-  function handleSelectTheme(selected: Theme) {
-    setSelectedTheme(selected);
-    localStorage.setItem("theme", selected);
-  }
+export function App({ onSelectTheme }: Readonly<AppProps>) {
+  const { colors, fontColor } = useThemeContext();
+
+  const themeConfig: ThemeConfig = {
+    token: {
+      colorPrimary: colors.monochromatic.primary,
+    },
+    components: {
+      Button: {
+        primaryColor: fontColor,
+        colorBgBase: colors.monochromatic.primary,
+      },
+      Collapse: {
+        headerBg: colors.monochromatic.primary,
+        colorBorder: colors.monochromatic.tertiary,
+      },
+      Form: {
+        labelColor: fontColor,
+      },
+      Menu: {
+        itemColor: fontColor,
+        colorPrimary: fontColor,
+        itemHoverColor: fontColor,
+        itemSelectedColor: fontColor,
+      },
+      Modal: {
+        contentBg: colors.shadow.secondary,
+      },
+      Pagination: {
+        colorText: fontColor,
+        colorTextDisabled: `${fontColor}55`,
+      },
+      Table: {
+        headerBg: colors.monochromatic.primary,
+        headerSortHoverBg: colors.shadow.tertiary,
+        bodySortBg: colors.monochromatic.tertiary,
+        headerSortActiveBg: colors.shadow.quaternary,
+      },
+      Typography: {
+        colorText: fontColor,
+      },
+    },
+  };
 
   return (
-    <ThemeProvider theme={theme[selectedTheme]}>
-      <ProjectContainer xs={24}>
-        <ConfigProvider>
+    <ProjectContainer xs={24}>
+      <ConfigProvider theme={themeConfig}>
+        <BrowserRouter>
           <QueryClientProvider client={queryClient}>
-            <GlobalHeader onSelectTheme={handleSelectTheme} />
-            <Routes />
+            <GlobalHeader onSelectTheme={onSelectTheme} />
+            <AppRoutes />
           </QueryClientProvider>
-        </ConfigProvider>
-      </ProjectContainer>
-    </ThemeProvider>
+        </BrowserRouter>
+      </ConfigProvider>
+    </ProjectContainer>
   );
 }
