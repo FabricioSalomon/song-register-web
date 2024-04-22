@@ -9,8 +9,6 @@ export const SwitchContainer = styled(Col)`
   }
 
   .ant-switch-inner {
-    color: ${({ theme }) => theme.colors.monochromatic.tertiary};
-
     .ant-typography {
       font-size: ${({ theme }) => theme.fonts.small};
     }
@@ -18,7 +16,6 @@ export const SwitchContainer = styled(Col)`
     span {
       svg {
         font-size: ${({ theme }) => theme.fonts.small};
-        color: ${({ theme }) => theme.colors.monochromatic.primary};
       }
     }
   }
@@ -29,6 +26,40 @@ export const SwitchContainer = styled(Col)`
     &:hover:not(.ant-switch-disabled) {
       filter: brightness(0.9);
       background: ${({ theme }) => theme.colors.monochromatic.secondary};
+    }
+  }
+`;
+
+export const MenuContainer = styled(Col)`
+  .ant-menu {
+    border-bottom: 0px;
+    background: transparent;
+
+    .ant-menu-item {
+      &:hover {
+        &::after {
+          border-bottom-width: 4px;
+          border-bottom-color: ${({ theme }) => theme.colors.shadow.secondary};
+
+          filter: brightness(1.2);
+        }
+      }
+    }
+
+    .ant-menu-item-selected {
+      &::after {
+        border-bottom-width: 4px;
+        border-bottom-color: ${({ theme }) => theme.colors.shadow.secondary};
+      }
+
+      &:hover {
+        &::after {
+          border-bottom-width: 4px;
+          border-bottom-color: ${({ theme }) => theme.colors.shadow.secondary};
+
+          filter: brightness(0.9);
+        }
+      }
     }
   }
 `;
