@@ -3,7 +3,7 @@ import { Color, ColorGroup, Colors, FontSize, Size } from "../base";
 
 export const LightColors: Colors = {
   [ColorGroup.MONOCHROMATIC]: {
-    [Color.PRIMARY]: "#993366",
+    [Color.PRIMARY]: "#cc3366",
     [Color.SECONDARY]: "#8B2C5F",
     [Color.TERTIARY]: "#77264D",
     [Color.QUATERNARY]: "#5F1D3E",
@@ -14,12 +14,12 @@ export const LightColors: Colors = {
     [Color.TERTIARY]: "#AD3D6F",
     [Color.QUATERNARY]: "#CC477F",
   },
-  
 };
 
 export const light: LightTheme = {
   colors: LightColors,
-  backgroundColor: "#FFFFFF",
+  fontColor: "#000000",
+  backgroundColor: "#CC477F55",
   fonts: {
     [Size.SMALL]: FontSize[Size.SMALL],
     [Size.MEDIUM]: FontSize[Size.MEDIUM],
