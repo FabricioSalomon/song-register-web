@@ -1,17 +1,13 @@
 import React from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-import { Home } from "../pages/Home";
+import * as Pages from "@/pages";
 
-function Routes() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Home />,
-    },
-  ]);
-
-  return <RouterProvider router={router} />;
+export function AppRoutes() {
+  return (
+    <Routes>
+      <Route path="/" element={<Pages.Home />} />
+      <Route path="authors" element={<Pages.Authors />} />
+    </Routes>
+  );
 }
-
-export default Routes;

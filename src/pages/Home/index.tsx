@@ -3,6 +3,7 @@ import React from "react";
 
 import { useGetAuthors } from "@/hooks";
 import { Text } from "@/components/Text";
+import { Title } from "@/components/Title";
 
 export function Home() {
   const {
@@ -31,8 +32,12 @@ export function Home() {
   }
 
   return (
-    <Row>
-      <Col xs={24}>Home</Col>
+    <Row style={{ padding: "0 1rem" }} gutter={[16, 16]}>
+      <Col xs={24}>
+        <Title level={3} style={{ margin: 0 }}>
+          Home
+        </Title>
+      </Col>
     </Row>
   );
 }
