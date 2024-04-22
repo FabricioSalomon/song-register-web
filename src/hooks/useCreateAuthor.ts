@@ -31,6 +31,7 @@ export function useCreateAuthor() {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.AUTHORS.GET_AUTHORS_LIST],
       });
+      message.success("Author created successfully");
     },
     onError: (error) => {
       message.error(error?.response?.data?.message ?? "Something went wrong");

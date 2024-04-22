@@ -3,36 +3,42 @@ import { QUERY_KEYS } from "@/utils/query-keys";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import Api from "@/services/api";
-import { Author } from "@/types";
+import { Keyword } from "@/types";
 import { message } from "antd";
 
-interface UpdateAuthorDTO {
+interface DeleteKeywordDTO {
   id: string;
-  name: string;
 }
 
-type UpdateAuthorResponse = Author;
+type DeleteKeywordResponse = Keyword;
 
 type Response = {
   message: string;
 };
 
-type UpdateAuthorError = AxiosError<Response>;
+type DeleteKeywordError = AxiosError<Response>;
 
-async function updateAuthor(parameters: UpdateAuthorDTO): Promise<Author> {
-  const { data } = await Api.put<Author>("/authors", parameters);
+async function deleteKeyword(params: DeleteKeywordDTO): Promise<Keyword> {
+  const { data } = await Api.delete<Keyword>("/keywords", {
+    params,
+  });
   return data;
 }
 
-export function useUpdateAuthor() {
+export function useDeleteKeyword() {
   const queryClient = useQueryClient();
-  return useMutation<UpdateAuthorResponse, UpdateAuthorError, UpdateAuthorDTO>({
-    mutationFn: (payload) => updateAuthor(payload),
+  return useMutation<
+    DeleteKeywordResponse,
+    DeleteKeywordError,
+    DeleteKeywordDTO
+  >({
+    mutationFn: (payload) => deleteKeyword(payload),
     onSuccess: async () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.AUTHORS.GET_AUTHORS_LIST],
       });
-      message.success("Author updated successfully");
+      message.success("Keyword deleted successfully");
+
     },
     onError: (error) => {
       message.error(error?.response?.data?.message ?? "Something went wrong");

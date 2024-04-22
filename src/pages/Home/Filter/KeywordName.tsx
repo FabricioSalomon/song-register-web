@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Input } from "antd";
 
-export function AuthorName() {
+export function KeywordName() {
   return (
     <Form.Item
       label="name"

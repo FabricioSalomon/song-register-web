@@ -8,6 +8,8 @@ export function AppRoutes() {
     <Routes>
       <Route path="/" element={<Pages.Home />} />
       <Route path="authors" element={<Pages.Authors />} />
+      <Route path="keywords" element={<Pages.Keywords />} />
+      <Route path="song-register" element={<Pages.SongRegister />} />
     </Routes>
   );
 }

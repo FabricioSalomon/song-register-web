@@ -33,6 +33,7 @@ export function useDeleteAuthor() {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.AUTHORS.GET_AUTHORS_LIST],
       });
+      message.success("Author deleted successfully");
     },
     onError: (error) => {
       message.error(error?.response?.data?.message ?? "Something went wrong");

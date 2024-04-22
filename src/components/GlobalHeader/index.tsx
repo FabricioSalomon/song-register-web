@@ -1,11 +1,13 @@
 import {
-  MoonOutlined,
   SunOutlined,
+  KeyOutlined,
+  MoonOutlined,
+  SaveOutlined,
   PlayCircleOutlined,
   UsergroupAddOutlined,
 } from "@ant-design/icons";
 import { MenuProps } from "antd/lib";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Menu, Row, Switch } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -26,9 +28,19 @@ const items: MenuProps["items"] = [
     icon: <PlayCircleOutlined />,
   },
   {
+    key: "/song-register",
+    label: "Song register",
+    icon: <SaveOutlined />,
+  },
+  {
     key: "/authors",
     label: "Authors",
     icon: <UsergroupAddOutlined />,
+  },
+  {
+    key: "/keywords",
+    label: "Keywords",
+    icon: <KeyOutlined />,
   },
 ];
 
@@ -41,6 +53,12 @@ export function GlobalHeader({ onSelectTheme }: Readonly<GlobalHeaderProps>) {
 
   const storageTheme = localStorage.getItem("theme");
 
+  useEffect(() => {
+    if (current !== location.pathname) {
+      setCurrent(location.pathname);
+    }
+  }, [location]);
+
   function handleSelectTheme(value: boolean) {
     return onSelectTheme(!value ? Theme.LIGHT : Theme.DARK);
   }
@@ -52,7 +70,11 @@ export function GlobalHeader({ onSelectTheme }: Readonly<GlobalHeaderProps>) {
 
   return (
     <Row
-      style={{ padding: '0.5rem 0', marginBottom: "2rem", borderBottom: `1px solid ${fontColor}` }}
+      style={{
+        padding: "0.5rem 0",
+        marginBottom: "2rem",
+        borderBottom: `1px solid ${fontColor}`,
+      }}
     >
       <Col xs={24}>
         <Row align="middle">
