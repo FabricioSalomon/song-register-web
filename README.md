@@ -5,12 +5,6 @@
 
 ## Configure dev environment
 
-### Create `.env.development` file on root folder and add the code below:
-
-```
-REACT_APP_NODE_ENV=development
-```
-
 ### Install dependecies
 
 ```
