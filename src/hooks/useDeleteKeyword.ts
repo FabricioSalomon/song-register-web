@@ -1,10 +1,10 @@
+import { message } from "antd";
 import { AxiosError } from "axios";
-import { QUERY_KEYS } from "@/utils/query-keys";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import Api from "@/services/api";
 import { Keyword } from "@/types";
-import { message } from "antd";
+import { QUERY_KEYS } from "@/utils/query-keys";
 
 interface DeleteKeywordDTO {
   id: string;
@@ -35,10 +35,9 @@ export function useDeleteKeyword() {
     mutationFn: (payload) => deleteKeyword(payload),
     onSuccess: async () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.AUTHORS.GET_AUTHORS_LIST],
+        queryKey: [QUERY_KEYS.KEYWORDS.GET_KEYWORDS_LIST],
       });
       message.success("Keyword deleted successfully");
-
     },
     onError: (error) => {
       message.error(error?.response?.data?.message ?? "Something went wrong");

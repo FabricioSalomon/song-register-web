@@ -1,16 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { QUERY_KEYS } from "@/utils/query-keys";
 import { AxiosError } from "axios";
-import { Moment } from "moment";
 import { message } from "antd";
 
 import { Song } from "@/types";
 import Api from "@/services/api";
+import { QUERY_KEYS } from "@/utils/query-keys";
 
 export type CreateSongDTO = {
   name: string;
   author_id: string;
-  released_at: Moment;
+  released_at: string;
   keywords_ids: string[];
 };
 

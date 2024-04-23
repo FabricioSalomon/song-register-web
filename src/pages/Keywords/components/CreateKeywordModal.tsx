@@ -19,12 +19,16 @@ export function CreateKeywordModal({
   const { mutateAsync: create } = useCreateKeyword();
 
   async function handleCreateKeyword(): Promise<void> {
-    const name = form.getFieldValue("keyword_name");
-    const created = await create({
-      name,
-    });
-    if (created?.id) {
-      onNewKeywordClick(false);
+    try {
+      const name = form.getFieldValue("keyword_name");
+      const created = await create({
+        name,
+      });
+      if (created?.id) {
+        onNewKeywordClick(false);
+      }
+    } catch (error) {
+      return;
     }
   }
 

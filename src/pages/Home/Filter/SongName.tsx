@@ -1,10 +1,10 @@
 import React from "react";
 import { Form, Input } from "antd";
 
-export function AuthorName() {
+export function SongName() {
   return (
     <Form.Item
-      label="Name"
+      label="Song"
       labelCol={{ xs: 24 }}
       labelAlign="left"
       name={["name"]}

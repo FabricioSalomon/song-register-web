@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import * as Pages from "@/pages";
+import * as Pages from "../pages";
 
 export function AppRoutes() {
   return (

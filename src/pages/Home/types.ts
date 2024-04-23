@@ -1,12 +1,16 @@
-import type { Moment } from "moment";
+import { Dayjs } from "dayjs";
 
 export type FormFields = {
-  name: string;
-  created_at?: Moment[];
+  name?: string;
+  keyword?: string;
+  author_id?: string;
+  released_at?: Dayjs[];
 };
 
 export type FilterRequest = {
-  name: string;
-  created_at_end?: string;
-  created_at_start?: string;
+  name?: string;
+  keyword?: string;
+  author_id?: string;
+  released_at_end?: string;
+  released_at_start?: string;
 };

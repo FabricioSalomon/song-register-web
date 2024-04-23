@@ -1,4 +1,6 @@
+export * from "./useUpdateSong";
 export * from "./useGetAuthors";
+export * from "./useDeleteSong";
 export * from "./useCreateSong";
 export * from "./useGetKeywords";
 export * from "./useDeleteAuthor";

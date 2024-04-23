@@ -14,12 +14,12 @@ export function NoSongsRegistered(props: Readonly<NoSongsRegisteredProps>) {
   }
 
   return (
-    <Row>
+    <Row gutter={[16, 16]}>
       <Col xs={24}>
         <Text>No songs available, please register new songs to list them.</Text>
       </Col>
       <Col xs={24}>
-        <Button type="primary" onClick={handleRegisterSongClick}>
+        <Button size="large" type="primary" onClick={handleRegisterSongClick}>
           Register new song now!
         </Button>
       </Col>

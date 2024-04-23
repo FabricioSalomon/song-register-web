@@ -8,6 +8,8 @@ import _ from "lodash";
 import { FilterCollapse } from "@/components/FilterCollapse";
 import { FilterRequest, FormFields } from "../types";
 import { KeywordName } from "./KeywordName";
+import { ReleasedAt } from "./ReleasedAt";
+import { SongName } from "./SongName";
 import { Authors } from "./Authors";
 
 const { useForm } = Form;
@@ -23,23 +25,6 @@ export function Filter({ onFilterClick, queryParams }: Readonly<FilterProps>) {
   const [disabled, setDisabled] = useState<boolean>(true);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const initialValues: FormFields = mapFilterInitialValues(queryParams) ?? {};
-
-  function mapFilterInitialValues(queryParams: FilterRequest): FormFields {
-    const { created_at_start, created_at_end } = queryParams;
-
-    const created_at =
-      created_at_start && created_at_end
-        ? [moment(created_at_start), moment(created_at_end)]
-        : undefined;
-
-    const initialValues: FormFields = {
-      ...queryParams,
-      created_at,
-    };
-    return initialValues;
-  }
-
   function handleFilter(filterData: FormFields): void {
     const mappedDataToRequest = mapFilterDataToRequest(filterData);
     updateURLParams(mappedDataToRequest);
@@ -47,10 +32,27 @@ export function Filter({ onFilterClick, queryParams }: Readonly<FilterProps>) {
   }
 
   function mapFilterDataToRequest(filterData: FormFields): FilterRequest {
-    const initialValues: FormFields = {
-      ...filterData,
+    const { released_at, author_id, keyword, name } = filterData;
+    let [released_at_start, released_at_end]: (string | undefined)[] = [
+      undefined,
+      undefined,
+    ];
+
+    if (released_at) {
+      const [start, end] = released_at;
+      [released_at_start, released_at_end] = [
+        moment(new Date(start.format())).format("YYYY/MM/DD"),
+        moment(new Date(end.format())).format("YYYY/MM/DD"),
+      ];
+    }
+    const values: FilterRequest = {
+      name,
+      keyword,
+      author_id,
+      released_at_end,
+      released_at_start,
     };
-    return initialValues;
+    return values;
   }
 
   function updateURLParams(params: FilterRequest): void {
@@ -81,9 +83,12 @@ export function Filter({ onFilterClick, queryParams }: Readonly<FilterProps>) {
   }
 
   function handleClear(): void {
-    form.resetFields();
-    setSearchParams("cleared=true");
     onFilterClick(undefined);
+    setSearchParams("cleared=true");
+    form.setFieldValue("name", undefined);
+    form.setFieldValue("keyword", undefined);
+    form.setFieldValue("author_id", undefined);
+    form.setFieldValue("released_at", undefined);
   }
 
   const queryParamsArray = Object.keys(queryParams);
@@ -96,16 +101,22 @@ export function Filter({ onFilterClick, queryParams }: Readonly<FilterProps>) {
         form={form}
         layout="vertical"
         onFinish={handleFilter}
-        initialValues={initialValues}
+        initialValues={queryParams}
         onFieldsChange={handleFieldsChange}
       >
         <Col xs={24}>
           <Row gutter={8}>
             <Col xs={24} lg={8} xxl={6}>
+              <SongName />
+            </Col>
+            <Col xs={24} lg={8} xxl={6}>
               <Authors />
             </Col>
             <Col xs={24} lg={8} xxl={6}>
               <KeywordName />
+            </Col>
+            <Col xs={24} lg={8} xxl={6}>
+              <ReleasedAt />
             </Col>
           </Row>
         </Col>

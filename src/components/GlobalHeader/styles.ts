@@ -39,7 +39,7 @@ export const MenuContainer = styled(Col)`
       &:hover {
         &::after {
           border-bottom-width: 4px;
-          border-bottom-color: ${({ theme }) => theme.colors.shadow.secondary};
+          border-bottom-color: ${({ theme }) => theme.colors.monochromatic.secondary};
 
           filter: brightness(1.2);
         }
@@ -49,13 +49,13 @@ export const MenuContainer = styled(Col)`
     .ant-menu-item-selected {
       &::after {
         border-bottom-width: 4px;
-        border-bottom-color: ${({ theme }) => theme.colors.shadow.secondary};
+        border-bottom-color: ${({ theme }) => theme.colors.monochromatic.secondary};
       }
 
       &:hover {
         &::after {
           border-bottom-width: 4px;
-          border-bottom-color: ${({ theme }) => theme.colors.shadow.secondary};
+          border-bottom-color: ${({ theme }) => theme.colors.monochromatic.secondary};
 
           filter: brightness(0.9);
         }

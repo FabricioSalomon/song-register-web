@@ -1,6 +1,6 @@
-import { Form, DatePicker } from "antd";
 import React from "react";
-import dayjs from "dayjs";
+import moment from "moment";
+import { Form, DatePicker } from "antd";
 
 export function ReleasedAt() {
   return (
@@ -17,8 +17,10 @@ export function ReleasedAt() {
       ]}
     >
       <DatePicker
+        placeholder="Start date"
         style={{ width: "100%" }}
-        disabledDate={(current) => current > dayjs()}
+        format={moment().format("L")}
+        disabledDate={(current) => current > moment()}
       />
     </Form.Item>
   );

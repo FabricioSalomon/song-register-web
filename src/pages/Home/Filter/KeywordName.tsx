@@ -4,10 +4,10 @@ import { Form, Input } from "antd";
 export function KeywordName() {
   return (
     <Form.Item
-      label="name"
+      label="Keyword"
       labelCol={{ xs: 24 }}
       labelAlign="left"
-      name={["name"]}
+      name={["keyword"]}
     >
       <Input placeholder="Name" />
     </Form.Item>

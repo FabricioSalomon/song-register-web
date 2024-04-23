@@ -3,37 +3,37 @@ import { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import Api from "@/services/api";
-import { Author } from "@/types";
+import { Song } from "@/types";
 import { QUERY_KEYS } from "@/utils/query-keys";
 
-interface DeleteAuthorDTO {
+interface DeleteSongDTO {
   id: string;
 }
 
-type DeleteAuthorResponse = Author;
+type DeleteSongResponse = Song;
 
 type Response = {
   message: string;
 };
 
-type DeleteAuthorError = AxiosError<Response>;
+type DeleteSongError = AxiosError<Response>;
 
-async function deleteAuthor(params: DeleteAuthorDTO): Promise<Author> {
-  const { data } = await Api.delete<Author>("/authors", {
+async function deleteSong(params: DeleteSongDTO): Promise<Song> {
+  const { data } = await Api.delete<Song>("/songs", {
     params,
   });
   return data;
 }
 
-export function useDeleteAuthor() {
+export function useDeleteSong() {
   const queryClient = useQueryClient();
-  return useMutation<DeleteAuthorResponse, DeleteAuthorError, DeleteAuthorDTO>({
-    mutationFn: (payload) => deleteAuthor(payload),
+  return useMutation<DeleteSongResponse, DeleteSongError, DeleteSongDTO>({
+    mutationFn: (payload) => deleteSong(payload),
     onSuccess: async () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.AUTHORS.GET_AUTHORS_LIST],
+        queryKey: [QUERY_KEYS.SONGS.GET_SONGS_LIST],
       });
-      message.success("Author deleted successfully");
+      message.success("Song deleted successfully");
     },
     onError: (error) => {
       message.error(error?.response?.data?.message ?? "Something went wrong");

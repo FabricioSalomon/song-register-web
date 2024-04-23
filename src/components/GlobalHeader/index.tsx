@@ -8,14 +8,13 @@ import {
 } from "@ant-design/icons";
 import { MenuProps } from "antd/lib";
 import React, { useEffect, useState } from "react";
-import { Col, Menu, Row, Switch } from "antd";
+import { Col, Form, Menu, Row, Switch } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { Text } from "../Text";
 import { Theme } from "@/theme";
 import { SwtichChildren } from "./SwtichChildren";
-import { MenuContainer, SwitchContainer } from "./styles";
 import { useThemeContext } from "@/context/Theme";
+import { MenuContainer, SwitchContainer } from "./styles";
 
 interface GlobalHeaderProps {
   onSelectTheme: (theme: Theme) => void;
@@ -71,14 +70,14 @@ export function GlobalHeader({ onSelectTheme }: Readonly<GlobalHeaderProps>) {
   return (
     <Row
       style={{
-        padding: "0.5rem 0",
+        padding: "0.5rem",
         marginBottom: "2rem",
         borderBottom: `1px solid ${fontColor}`,
       }}
     >
       <Col xs={24}>
-        <Row align="middle">
-          <MenuContainer xs={20}>
+        <Row align="middle" justify="space-between">
+          <MenuContainer xs={16}>
             <Menu
               items={items}
               mode="horizontal"
@@ -86,23 +85,22 @@ export function GlobalHeader({ onSelectTheme }: Readonly<GlobalHeaderProps>) {
               onClick={(event) => handleMenuClick(event.key)}
             />
           </MenuContainer>
-          <Col xs={4}>
+          <Col>
             <Row justify="end" align="middle" gutter={[4, 4]}>
-              <Col>
-                <Text>Theme</Text>
-              </Col>
-              <SwitchContainer xs={8}>
-                <Switch
-                  checked={(storageTheme as Theme) === Theme.DARK}
-                  onChange={handleSelectTheme}
-                  checkedChildren={
-                    <SwtichChildren title="Dark" icon={MoonOutlined} />
-                  }
-                  unCheckedChildren={
-                    <SwtichChildren title="Light" icon={SunOutlined} />
-                  }
-                />
-              </SwitchContainer>
+              <Form.Item style={{ margin: 0 }} label="Theme">
+                <SwitchContainer xs={24}>
+                  <Switch
+                    checked={(storageTheme as Theme) === Theme.DARK}
+                    onChange={handleSelectTheme}
+                    checkedChildren={
+                      <SwtichChildren title="Dark" icon={MoonOutlined} />
+                    }
+                    unCheckedChildren={
+                      <SwtichChildren title="Light" icon={SunOutlined} />
+                    }
+                  />
+                </SwitchContainer>
+              </Form.Item>
             </Row>
           </Col>
         </Row>

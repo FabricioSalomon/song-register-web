@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Row } from "antd";
+import { Text } from "../Text";
 
 interface SwtichChildrenProps {
   title: string;
@@ -12,7 +13,7 @@ export function SwtichChildren({
 }: Readonly<SwtichChildrenProps>) {
   return (
     <Row gutter={[8, 8]} align="middle">
-      <Col>{title}</Col>
+      <Col><Text>{title}</Text></Col>
       <Col>
         <Icon />
       </Col>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button, Col, Row } from "antd";
 
-import { Text } from "@/components/Text";
 import { CustomDivider, CustomInput } from "./styles";
 
 interface OptionsMenuWithCreationProps {

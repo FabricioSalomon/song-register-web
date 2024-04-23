@@ -1,10 +1,10 @@
+import { message } from "antd";
 import { AxiosError } from "axios";
-import { QUERY_KEYS } from "@/utils/query-keys";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { Keyword } from "@/types";
 import Api from "@/services/api";
-import { message } from "antd";
+import { Keyword } from "@/types";
+import { QUERY_KEYS } from "@/utils/query-keys";
 
 interface CreateKeywordDTO {
   name: string;
@@ -32,7 +32,7 @@ export function useCreateKeyword() {
   >({
     mutationFn: (payload) => createKeyword(payload),
     onSuccess: async () => {
-      queryClient.invalidateQueries({
+      await queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.KEYWORDS.GET_KEYWORDS_LIST],
       });
       message.success("Keyword created successfully");

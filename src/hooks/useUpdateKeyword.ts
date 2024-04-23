@@ -1,10 +1,10 @@
 import { message } from "antd";
 import { AxiosError } from "axios";
-import { QUERY_KEYS } from "@/utils/query-keys";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import Api from "@/services/api";
 import { Keyword } from "@/types";
+import { QUERY_KEYS } from "@/utils/query-keys";
 
 interface UpdateKeywordDTO {
   id: string;
