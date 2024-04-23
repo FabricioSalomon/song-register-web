@@ -7,7 +7,7 @@ import { GlobalHeader } from "./components/GlobalHeader";
 import { useThemeContext } from "./context/Theme";
 import { ProjectContainer } from "./styles";
 import { AppRoutes } from "./routes";
-import { Theme } from "./theme";
+import { Theme, light } from "./theme";
 
 const queryClient = new QueryClient();
 
@@ -24,14 +24,19 @@ export function App({ onSelectTheme }: Readonly<AppProps>) {
     },
     components: {
       Button: {
-        primaryColor: fontColor,
-        colorBgBase: colors.monochromatic.primary,
+        colorBgContainerDisabled: "#f1f1f188",
+      },
+      Card: {
+        colorBorderSecondary: colors.monochromatic.secondary,
+        colorBgContainer: colors.monochromatic.secondary,
       },
       Collapse: {
+        contentBg: "#d1d1d155",
         headerBg: colors.monochromatic.primary,
-        colorBorder: colors.monochromatic.tertiary,
+        colorBorder: "none",
       },
       Form: {
+        colorError: fontColor,
         labelColor: fontColor,
       },
       Menu: {
@@ -41,7 +46,7 @@ export function App({ onSelectTheme }: Readonly<AppProps>) {
         itemSelectedColor: fontColor,
       },
       Modal: {
-        contentBg: colors.shadow.secondary,
+        contentBg: light.colors.monochromatic.secondary,
       },
       Pagination: {
         colorText: fontColor,
