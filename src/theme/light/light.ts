@@ -4,7 +4,7 @@ import { Color, ColorGroup, Colors, FontSize, Size } from "../base";
 export const LightColors: Colors = {
   [ColorGroup.MONOCHROMATIC]: {
     [Color.PRIMARY]: "#cc3366",
-    [Color.SECONDARY]: "#8B2C5F",
+    [Color.SECONDARY]: "#F1477F",
     [Color.TERTIARY]: "#77264D",
     [Color.QUATERNARY]: "#5F1D3E",
   },

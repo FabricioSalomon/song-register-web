@@ -1,10 +1,10 @@
+import { message } from "antd";
 import { AxiosError } from "axios";
-import { QUERY_KEYS } from "@/utils/query-keys";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import Api from "@/services/api";
 import { Author } from "@/types";
-import { message } from "antd";
+import Api from "@/services/api";
+import { QUERY_KEYS } from "@/utils/query-keys";
 
 interface CreateAuthorDTO {
   name: string;
@@ -31,6 +31,7 @@ export function useCreateAuthor() {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.AUTHORS.GET_AUTHORS_LIST],
       });
+      message.success("Author created successfully");
     },
     onError: (error) => {
       message.error(error?.response?.data?.message ?? "Something went wrong");

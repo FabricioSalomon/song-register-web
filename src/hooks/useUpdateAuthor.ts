@@ -1,10 +1,10 @@
+import { message } from "antd";
 import { AxiosError } from "axios";
-import { QUERY_KEYS } from "@/utils/query-keys";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import Api from "@/services/api";
 import { Author } from "@/types";
-import { message } from "antd";
+import { QUERY_KEYS } from "@/utils/query-keys";
 
 interface UpdateAuthorDTO {
   id: string;
@@ -32,6 +32,7 @@ export function useUpdateAuthor() {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.AUTHORS.GET_AUTHORS_LIST],
       });
+      message.success("Author updated successfully");
     },
     onError: (error) => {
       message.error(error?.response?.data?.message ?? "Something went wrong");
