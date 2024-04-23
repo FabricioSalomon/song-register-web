@@ -1,6 +1,6 @@
 import { Col, Row } from "antd";
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { PlusCircleFilled } from "@ant-design/icons";
 
 import { useGetAuthors } from "@/hooks";
@@ -11,8 +11,7 @@ import { CustomButton, TitleContainer } from "./styles";
 import { Filter, AuthorsListTable, CreateAuthorModal } from "./components";
 
 export function Authors() {
-  const { search } = useLocation();
-  const searchParams = new URLSearchParams(search);
+  let [searchParams] = useSearchParams();
   const queryParams = convertURLParamToObject(searchParams);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -70,7 +69,7 @@ export function Authors() {
                 <Col>
                   <PlusCircleFilled />
                 </Col>
-                <Col xs={16}>New author</Col>
+                <Col xs={15}>New author</Col>
               </Row>
             </CustomButton>
           </Col>

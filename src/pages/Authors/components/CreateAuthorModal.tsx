@@ -19,12 +19,16 @@ export function CreateAuthorModal({
   const { mutateAsync: create } = useCreateAuthor();
 
   async function handleCreateAuthor(): Promise<void> {
-    const name = form.getFieldValue("author_name");
-    const created = await create({
-      name,
-    });
-    if (created?.id) {
-      onNewAuthorClick(false);
+    try {
+      const name = form.getFieldValue("author_name");
+      const created = await create({
+        name,
+      });
+      if (created?.id) {
+        onNewAuthorClick(false);
+      }
+    } catch (error) {
+      return;
     }
   }
 

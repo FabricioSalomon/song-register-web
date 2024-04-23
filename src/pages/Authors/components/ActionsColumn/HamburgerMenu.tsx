@@ -17,8 +17,10 @@ export function HamburgerMenu({
   const items = [
     {
       key: 1,
-      icon: <EditOutlined onClick={() => onEditClick(true)} />,
-      label: <OptionDropdown>Edit</OptionDropdown>,
+      icon: <EditOutlined />,
+      label: (
+        <OptionDropdown onClick={() => onEditClick(true)}>Edit</OptionDropdown>
+      ),
     },
     {
       key: 4,
